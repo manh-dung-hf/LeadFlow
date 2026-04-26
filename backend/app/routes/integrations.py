@@ -90,12 +90,43 @@ def test_integration(name):
 def handle_webhook(name):
     """
     Generic webhook handler for all channels.
-    - If the same contact (phone/chat_id) already has an open lead → add message to that thread
+    - Detect staff commands (Telegram /reply, /take, etc.)
+    - If the same contact already has an open lead → add message to thread
     - If new contact → create new lead
-    - AI auto-reply only if no human (sales) has replied yet
+    - AI auto-reply only if enabled and no human has replied
     """
     from ..models.message import Message
     data = request.get_json() or {}
+
+    # ── TELEGRAM: Check if this is a STAFF COMMAND ──
+    if name == 'telegram':
+        msg = data.get('message', {})
+        if not msg:
+            return jsonify({"status": "ignored"}), 200
+
+        text = msg.get('text', '')
+        chat_id = str(msg.get('chat', {}).get('id', ''))
+
+        # If message starts with / → might be staff command
+        if text.startswith('/'):
+            from ..models.user import User
+            staff = User.query.filter_by(telegram_chat_id=chat_id).first()
+            # It's a staff command if: user is registered OR it's /register or /start or /help
+            if staff or text.startswith('/register') or text.startswith('/start') or text.startswith('/help'):
+                from ..services.staff_bot_service import handle_staff_command
+                integration = Integration.query.filter_by(name='telegram').first()
+                bot_token = integration.config.get('token', '') if integration and integration.config else ''
+                reply = handle_staff_command(chat_id, text, bot_token)
+                if reply:
+                    # Send reply back to staff
+                    if bot_token:
+                        import requests as http_req
+                        http_req.post(
+                            f"https://api.telegram.org/bot{bot_token}/sendMessage",
+                            json={"chat_id": chat_id, "text": reply, "parse_mode": "HTML"},
+                            timeout=10,
+                        )
+                    return jsonify({"status": "staff_command"}), 200
 
     lead_name = "New Lead"
     lead_content = ""
@@ -182,12 +213,12 @@ def handle_webhook(name):
         except Exception:
             pass
 
-        # AI auto-reply ONLY if no human has replied yet
+        # AI auto-reply ONLY if enabled AND no human has replied yet
         has_human_reply = Message.query.filter_by(
             lead_id=existing_lead.id, sender_type='sales'
         ).first() is not None
 
-        if not has_human_reply:
+        if existing_lead.ai_auto_reply_enabled and not has_human_reply:
             try:
                 from celery_worker import process_and_reply
                 process_and_reply.delay(existing_lead.id, lead_content)
@@ -238,6 +269,16 @@ def handle_webhook(name):
             from ..services.notification_service import notify_new_lead
             notify_new_lead(new_lead, assigned_user, socketio)
             socketio.emit('lead_created', new_lead.to_dict())
+        except Exception:
+            pass
+
+        # Notify assigned staff via their personal Telegram
+        try:
+            integration = Integration.query.filter_by(name='telegram').first()
+            bot_token = integration.config.get('token', '') if integration and integration.config else ''
+            if bot_token and assigned_user:
+                from ..services.staff_bot_service import notify_staff_new_lead
+                notify_staff_new_lead(new_lead, assigned_user, bot_token)
         except Exception:
             pass
 

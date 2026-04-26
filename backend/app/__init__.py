@@ -41,6 +41,9 @@ def create_app(config_class=Config):
     app.register_blueprint(files_bp, url_prefix='/api/files')
     app.register_blueprint(notifications_bp, url_prefix='/api/notifications')
 
+    from .routes.shifts import shifts_bp
+    app.register_blueprint(shifts_bp, url_prefix='/api/shifts')
+
     @socketio.on('join')
     def on_join(data):
         user_id = data.get('user_id')

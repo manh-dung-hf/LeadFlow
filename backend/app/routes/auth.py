@@ -54,6 +54,8 @@ def update_profile():
         user.phone = data['phone']
     if 'welcome_message' in data:
         user.welcome_message = data['welcome_message']
+    if 'telegram_chat_id' in data:
+        user.telegram_chat_id = data['telegram_chat_id']
     if 'email' in data and data['email'] != user.email:
         if User.query.filter_by(email=data['email']).first():
             return jsonify({"msg": "Email already in use"}), 400
@@ -153,6 +155,7 @@ def create_user():
         phone=data.get('phone', ''),
         max_leads=data.get('max_leads', 50),
         welcome_message=data.get('welcome_message', ''),
+        telegram_chat_id=data.get('telegram_chat_id', ''),
     )
     user.set_password(password)
     db.session.add(user)
@@ -209,6 +212,8 @@ def admin_update_user(user_id):
         if User.query.filter_by(email=data['email']).first():
             return jsonify({"msg": "Email already in use"}), 400
         target.email = data['email']
+    if 'telegram_chat_id' in data:
+        target.telegram_chat_id = data['telegram_chat_id']
 
     db.session.commit()
     return jsonify(target.to_dict()), 200

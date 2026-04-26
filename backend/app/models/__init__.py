@@ -7,3 +7,4 @@ from .integration import Integration
 from .script import Script
 from .notification import Notification
 from .activity_log import ActivityLog
+from .shift import ShiftSchedule, ShiftConfig

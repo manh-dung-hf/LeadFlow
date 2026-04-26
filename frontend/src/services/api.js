@@ -126,4 +126,16 @@ export const fileService = {
   downloadTemplate: () => api.get('/files/template/leads', { responseType: 'blob' }),
 };
 
+// --- Shifts ---
+export const shiftService = {
+  getShifts: (params) => api.get('/shifts', { params }),
+  createShift: (data) => api.post('/shifts', data),
+  updateShift: (id, data) => api.patch(`/shifts/${id}`, data),
+  deleteShift: (id) => api.delete(`/shifts/${id}`),
+  getConfig: () => api.get('/shifts/config'),
+  updateConfig: (data) => api.put('/shifts/config', data),
+  autoGenerate: (data) => api.post('/shifts/auto-generate', data),
+  getOnDuty: () => api.get('/shifts/on-duty'),
+};
+
 export default api;

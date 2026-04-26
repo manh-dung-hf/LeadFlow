@@ -74,9 +74,9 @@ def process_lead_ai(lead_id):
     db.session.add(log)
     db.session.commit()
 
-    # ── AUTO-REPLY to customer via their channel ──
+    # ── AUTO-REPLY to customer via their channel (only if enabled) ──
     suggested_reply = analysis.get('suggested_reply', '')
-    if suggested_reply and lead.phone and lead.source:
+    if suggested_reply and lead.phone and lead.source and lead.ai_auto_reply_enabled:
         try:
             from app.services.channel_service import reply_to_lead
             ok, channel, detail = reply_to_lead(lead, suggested_reply)
@@ -137,7 +137,10 @@ def process_and_reply(lead_id, new_message_content):
     if not lead:
         return
 
-    # Check again: if sales already replied, skip AI reply
+    # Check: AI auto-reply disabled or human already replied → skip
+    if not lead.ai_auto_reply_enabled:
+        return
+
     has_human_reply = Message.query.filter_by(
         lead_id=lead_id, sender_type='sales'
     ).first() is not None

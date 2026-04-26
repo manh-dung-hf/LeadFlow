@@ -17,6 +17,7 @@ import ZaloIntegrationPage from './pages/Settings/ZaloIntegrationPage';
 import AlibabaIntegrationPage from './pages/Settings/AlibabaIntegrationPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import UserManagementPage from './pages/Users/UserManagementPage';
+import ShiftSchedulePage from './pages/Users/ShiftSchedulePage';
 import LoginPage from './pages/Auth/LoginPage';
 
 const queryClient = new QueryClient({
@@ -85,6 +86,7 @@ function AppRoutes() {
         <Route path="/settings/alibaba" element={<AlibabaIntegrationPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/users" element={<UserManagementPage />} />
+        <Route path="/shifts" element={<ShiftSchedulePage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

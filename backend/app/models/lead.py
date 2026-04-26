@@ -30,6 +30,7 @@ class Lead(db.Model):
     next_follow_up = db.Column(db.DateTime)
     follow_up_count = db.Column(db.Integer, default=0)
     estimated_value = db.Column(db.Float, default=0)
+    ai_auto_reply_enabled = db.Column(db.Boolean, default=True)
 
     assigned_user = db.relationship('User', backref='leads', foreign_keys=[assigned_to])
 
@@ -51,4 +52,5 @@ class Lead(db.Model):
             'response_time_seconds': self.response_time_seconds,
             'next_follow_up': self.next_follow_up.isoformat() if self.next_follow_up else None,
             'follow_up_count': self.follow_up_count, 'estimated_value': self.estimated_value,
+            'ai_auto_reply_enabled': self.ai_auto_reply_enabled,
         }

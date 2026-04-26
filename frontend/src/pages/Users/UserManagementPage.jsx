@@ -27,7 +27,7 @@ export default function UserManagementPage() {
 
   // New user form
   const [newUser, setNewUser] = useState({
-    name: '', email: '', password: '', role: 'SALES', phone: '', max_leads: 50, welcome_message: '',
+    name: '', email: '', password: '', role: 'SALES', phone: '', max_leads: 50, welcome_message: '', telegram_chat_id: '',
   });
 
   const { data: users, isLoading } = useQuery({
@@ -41,7 +41,7 @@ export default function UserManagementPage() {
       toast.success('Đã tạo user mới');
       queryClient.invalidateQueries({ queryKey: ['users'] });
       setShowCreate(false);
-      setNewUser({ name: '', email: '', password: '', role: 'SALES', phone: '', max_leads: 50, welcome_message: '' });
+      setNewUser({ name: '', email: '', password: '', role: 'SALES', phone: '', max_leads: 50, welcome_message: '', telegram_chat_id: '' });
     },
     onError: (err) => toast.error(err.response?.data?.msg || 'Tạo thất bại'),
   });
@@ -264,6 +264,13 @@ export default function UserManagementPage() {
                   placeholder="Xin chào! Tôi là..."
                   className="w-full px-4 py-2.5 bg-ink-950/50 rounded-xl border border-white/10 outline-none text-sm resize-none" />
               </div>
+              <div>
+                <label className="label">Telegram Chat ID</label>
+                <input value={newUser.telegram_chat_id} onChange={(e) => setNewUser((f) => ({ ...f, telegram_chat_id: e.target.value }))}
+                  placeholder="Nhập Chat ID để nhận thông báo qua Telegram"
+                  className="w-full px-4 py-2.5 bg-ink-950/50 rounded-xl border border-white/10 outline-none text-sm" />
+                <p className="text-[9px] text-slate-600 mt-1">Staff nhắn /start cho @SaleLieu92bot rồi lấy chat_id từ API getUpdates</p>
+              </div>
               <div className="flex justify-end gap-3 pt-2">
                 <button type="button" onClick={() => setShowCreate(false)} className="px-5 py-2.5 text-slate-400 text-sm font-bold">Hủy</button>
                 <button type="submit" disabled={createMutation.isPending} className="btn-primary disabled:opacity-50">
@@ -321,6 +328,12 @@ export default function UserManagementPage() {
                 <label className="label">Lời chào</label>
                 <textarea value={editUser.welcome_message || ''} onChange={(e) => setEditUser((f) => ({ ...f, welcome_message: e.target.value }))} rows={2}
                   className="w-full px-4 py-2.5 bg-ink-950/50 rounded-xl border border-white/10 outline-none text-sm resize-none" />
+              </div>
+              <div>
+                <label className="label">Telegram Chat ID</label>
+                <input value={editUser.telegram_chat_id || ''} onChange={(e) => setEditUser((f) => ({ ...f, telegram_chat_id: e.target.value }))}
+                  placeholder="Chat ID cho thông báo Telegram"
+                  className="w-full px-4 py-2.5 bg-ink-950/50 rounded-xl border border-white/10 outline-none text-sm" />
               </div>
               <div className="flex justify-end gap-3 pt-2">
                 <button type="button" onClick={() => setEditUser(null)} className="px-5 py-2.5 text-slate-400 text-sm font-bold">Hủy</button>

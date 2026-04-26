@@ -11,6 +11,7 @@ import {
   Zap,
   UserCog,
   UserCircle,
+  Clock,
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useAuth } from '../../hooks/useAuth';
@@ -24,6 +25,7 @@ const menuItems = [
   { icon: BarChart3, label: 'Analytics', path: '/analytics', hideFor: ['SALES'] },
   { icon: MessageSquare, label: 'Scripts', path: '/scripts' },
   { icon: UserCog, label: 'Quản lý User', path: '/users', hideFor: ['SALES'] },
+  { icon: Clock, label: 'Phân ca', path: '/shifts', hideFor: ['SALES'] },
   { icon: Settings, label: 'Settings', path: '/settings' },
 ];
 
