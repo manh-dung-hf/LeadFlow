@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadFlow AI — Intelligent Sales CRM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+        <div class="gradient-sphere sphere-3"></div>
+        <div class="grid-overlay"></div>
+        <div class="particles"></div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>LeadFlow</h1>
+                        <span>AI</span>
+                    </div>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                    <a href="#leads" class="nav-item" data-page="leads">
+                        <i class="fas fa-users"></i>
+                        <span>Leads</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                    <a href="#pipeline" class="nav-item" data-page="pipeline">
+                        <i class="fas fa-stream"></i>
+                        <span>Pipeline</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                    <a href="#knowledge" class="nav-item" data-page="knowledge">
+                        <i class="fas fa-brain"></i>
+                        <span>Knowledge Base</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Tools</div>
+                    <a href="#scripts" class="nav-item" data-page="scripts">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Scripts</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                    <a href="#analytics" class="nav-item" data-page="analytics">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                    <a href="#settings" class="nav-item" data-page="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="https://picsum.photos/seed/user1/40/40" alt="User">
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">John Sales</div>
+                        <div class="user-role">Sales Rep</div>
+                    </div>
+                    <button class="user-menu-btn">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search leads, contacts, or anything..." id="globalSearch">
+                    </div>
+                </div>
+
+                <div class="topbar-right">
+                    <button class="btn btn-primary" id="addLeadBtn">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Lead</span>
+                    </button>
+
+                    <div class="notification-wrapper">
+                        <button class="notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-header">
+                                <h3>Notifications</h3>
+                                <button class="mark-all-read">Mark all read</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <div class="notification-icon hot">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">Hot Lead Alert</div>
+                                        <div class="notification-text">Michael from USA is ready to buy</div>
+                                        <div class="notification-time">2 min ago</div>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">SLA Violation</div>
+                                        <div class="notification-text">Lead #1234 overdue by 8 minutes</div>
+                                        <div class="notification-time">5 min ago</div>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-icon success">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">Lead Converted</div>
+                                        <div class="notification-text">Nguyen Van A deal closed!</div>
+                                        <div class="notification-time">1 hour ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content" id="pageContent">
+                <!-- Dashboard Page -->
+                <div class="page" id="dashboard-page">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Dashboard</h1>
+                            <p>Welcome back! Here's what's happening today.</p>
+                        </div>
+                        <div class="page-actions">
+                            <select class="date-filter">
+                                <option>Today</option>
+                                <option>This Week</option>
+                                <option>This Month</option>
+                                <option>Last 30 Days</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- KPI Cards -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card" data-kpi="total-leads">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="kpi-trend up">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>12%</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">
+                                <span class="counter" data-target="2847">0</span>
+                            </div>
+                            <div class="kpi-label">Total Leads</div>
+                            <div class="kpi-chart">
+                                <canvas id="leadsSparkline"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card" data-kpi="new-leads">
+                            <div class="kpi-header">
+                                <div class="kpi-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="kpi-trend up">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>8%</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">
+                                <span class="counter" data-target="142">0</span>
+                            </div>
+                            <div class="kpi-label">New Leads</div>
+                            <div class="kpi-chart">
+                                <canvas id="newLeadsSparkline"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card" data-kpi="hot-leads">
+                            <div class="kpi-header">
+                                <div class="kpi-icon hot">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="kpi-trend down">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <span>3%</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">
+                                <span class="counter" data-target="68">0</span>
+                            </div>
+                            <div class="kpi-label">Hot Leads</div>
+                            <div class="kpi-chart">
+                                <canvas id="hotLeadsSparkline"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card" data-kpi="conversion-rate">
+                            <div class="kpi-header">
+                                <div class="kpi-icon success">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div class="kpi-trend up">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>5%</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">
+                                <span class="counter" data-target="23.5">0</span>%
+                            </div>
+                            <div class="kpi-label">Conversion Rate</div>
+                            <div class="kpi-chart">
+                                <canvas id="conversionSparkline"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Grid -->
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Lead Pipeline</h3>
+                                <div class="chart-actions">
+                                    <button class="chart-action-btn">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chart-content">
+                                <canvas id="pipelineChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Leads by Source</h3>
+                                <div class="chart-actions">
+                                    <button class="chart-action-btn">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chart-content">
+                                <canvas id="sourceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="activity-section">
+                        <div class="section-header">
+                            <h3>Recent Activity</h3>
+                            <a href="#" class="view-all">View all</a>
+                        </div>
+                        <div class="activity-feed">
+                            <div class="activity-item">
+                                <div class="activity-icon new">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">New lead from Telegram</div>
+                                    <div class="activity-text">Sarah Johnson interested in bamboo houses</div>
+                                    <div class="activity-time">5 minutes ago</div>
+                                </div>
+                                <div class="activity-action">
+                                    <button class="btn btn-sm btn-primary">View</button>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon hot">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Hot lead identified</div>
+                                    <div class="activity-text">Michael Scott - Budget $50k, urgent</div>
+                                    <div class="activity-time">12 minutes ago</div>
+                                </div>
+                                <div class="activity-action">
+                                    <button class="btn btn-sm btn-primary">Contact</button>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon success">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Deal closed!</div>
+                                    <div class="activity-text">Nguyen Van A purchased Eco-Lite house</div>
+                                    <div class="activity-time">1 hour ago</div>
+                                </div>
+                                <div class="activity-action">
+                                    <button class="btn btn-sm btn-secondary">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leads Page -->
+                <div class="page hidden" id="leads-page">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Leads Management</h1>
+                            <p>Manage and track all your sales leads</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-secondary" id="uploadBtn">
+                                <i class="fas fa-upload"></i>
+                                <span>Upload Excel</span>
+                            </button>
+                            <button class="btn btn-primary" id="addLeadBtn2">
+                                <i class="fas fa-plus"></i>
+                                <span>Add Lead</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="filters-section">
+                        <div class="filter-group">
+                            <select class="filter-select" id="statusFilter">
+                                <option value="">All Status</option>
+                                <option value="NEW">New</option>
+                                <option value="CONTACTED">Contacted</option>
+                                <option value="QUOTED">Quoted</option>
+                                <option value="NEGOTIATION">Negotiation</option>
+                                <option value="WON">Won</option>
+                                <option value="LOST">Lost</option>
+                            </select>
+
+                            <select class="filter-select" id="temperatureFilter">
+                                <option value="">All Temperature</option>
+                                <option value="HOT">Hot</option>
+                                <option value="WARM">Warm</option>
+                                <option value="COLD">Cold</option>
+                            </select>
+
+                            <select class="filter-select" id="sourceFilter">
+                                <option value="">All Sources</option>
+                                <option value="TELEGRAM">Telegram</option>
+                                <option value="WHATSAPP">WhatsApp</option>
+                                <option value="ZALO">Zalo</option>
+                                <option value="WEB">Web</option>
+                                <option value="MANUAL">Manual</option>
+                            </select>
+                        </div>
+
+                        <div class="search-group">
+                            <div class="search-input-wrapper">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Search leads..." id="leadsSearch">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leads Table -->
+                    <div class="table-container">
+                        <table class="leads-table" id="leadsTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" class="select-all">
+                                    </th>
+                                    <th>Lead</th>
+                                    <th>Status</th>
+                                    <th>Temperature</th>
+                                    <th>Source</th>
+                                    <th>Country</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leadsTableBody">
+                                <!-- Table rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <div class="pagination-info">
+                            Showing <span id="showingFrom">1</span> to <span id="showingTo">10</span> of <span id="totalLeads">247</span> results
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" id="prevBtn" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="pagination-numbers">
+                                <button class="pagination-number active">1</button>
+                                <button class="pagination-number">2</button>
+                                <button class="pagination-number">3</button>
+                                <span class="pagination-dots">...</span>
+                                <button class="pagination-number">25</button>
+                            </div>
+                            <button class="pagination-btn" id="nextBtn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pipeline Page (Kanban) -->
+                <div class="page hidden" id="pipeline-page">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Sales Pipeline</h1>
+                            <p>Drag and drop leads to update their status</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-secondary" id="pipelineViewBtn">
+                                <i class="fas fa-th"></i>
+                                <span>Board View</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kanban Board -->
+                    <div class="kanban-board" id="kanbanBoard">
+                        <div class="kanban-column" data-status="NEW">
+                            <div class="kanban-header">
+                                <h3>New</h3>
+                                <span class="kanban-count">12</span>
+                            </div>
+                            <div class="kanban-cards" id="new-cards">
+                                <!-- Cards will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="kanban-column" data-status="CONTACTED">
+                            <div class="kanban-header">
+                                <h3>Contacted</h3>
+                                <span class="kanban-count">8</span>
+                            </div>
+                            <div class="kanban-cards" id="contacted-cards">
+                                <!-- Cards will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="kanban-column" data-status="QUOTED">
+                            <div class="kanban-header">
+                                <h3>Quoted</h3>
+                                <span class="kanban-count">5</span>
+                            </div>
+                            <div class="kanban-cards" id="quoted-cards">
+                                <!-- Cards will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="kanban-column" data-status="NEGOTIATION">
+                            <div class="kanban-header">
+                                <h3>Negotiation</h3>
+                                <span class="kanban-count">3</span>
+                            </div>
+                            <div class="kanban-cards" id="negotiation-cards">
+                                <!-- Cards will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="kanban-column" data-status="WON">
+                            <div class="kanban-header">
+                                <h3>Won</h3>
+                                <span class="kanban-count">15</span>
+                            </div>
+                            <div class="kanban-cards" id="won-cards">
+                                <!-- Cards will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="kanban-column" data-status="LOST">
+                            <div class="kanban-header">
+                                <h3>Lost</h3>
+                                <span class="kanban-count">7</span>
+                            </div>
+                            <div class="kanban-cards" id="lost-cards">
+                                <!-- Cards will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Base Page -->
+                <div class="page hidden" id="knowledge-page">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Knowledge Base</h1>
+                            <p>AI-powered product information and documentation</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" id="addKnowledgeBtn">
+                                <i class="fas fa-plus"></i>
+                                <span>Add Article</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="knowledge-search">
+                        <div class="search-input-wrapper large">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search knowledge base, products, or ask AI..." id="knowledgeSearch">
+                            <button class="search-btn">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filter Tags -->
+                    <div class="filter-tags">
+                        <button class="filter-tag active" data-category="all">All</button>
+                        <button class="filter-tag" data-category="product">Products</button>
+                        <button class="filter-tag" data-category="pricing">Pricing</button>
+                        <button class="filter-tag" data-category="shipping">Shipping</button>
+                        <button class="filter-tag" data-category="warranty">Warranty</button>
+                        <button class="filter-tag" data-category="faq">FAQ</button>
+                    </div>
+
+                    <!-- Knowledge Grid -->
+                    <div class="knowledge-grid" id="knowledgeGrid">
+                        <!-- Cards will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Scripts Page -->
+                <div class="page hidden" id="scripts-page">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Sales Scripts</h1>
+                            <p>Pre-defined scripts for different sales scenarios</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" id="addScriptBtn">
+                                <i class="fas fa-plus"></i>
+                                <span>Create Script</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Script Categories -->
+                    <div class="script-categories">
+                        <button class="category-tab active" data-category="all">All Scripts</button>
+                        <button class="category-tab" data-category="greeting">Greetings</button>
+                        <button class="category-tab" data-category="qualification">Qualification</button>
+                        <button class="category-tab" data-category="presentation">Presentation</button>
+                        <button class="category-tab" data-category="objection">Objection Handling</button>
+                        <button class="category-tab" data-category="closing">Closing</button>
+                    </div>
+
+                    <!-- Scripts List -->
+                    <div class="scripts-list" id="scriptsList">
+                        <!-- Scripts will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Analytics Page -->
+                <div class="page hidden" id="analytics-page">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Analytics & Reports</h1>
+                            <p>Deep insights into your sales performance</p>
+                        </div>
+                        <div class="page-actions">
+                            <select class="date-filter">
+                                <option>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                                <option>Last 90 Days</option>
+                                <option>This Year</option>
+                            </select>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-download"></i>
+                                <span>Export</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Cards -->
+                    <div class="analytics-grid">
+                        <div class="analytics-card full-width">
+                            <div class="analytics-header">
+                                <h3>Lead Generation Trend</h3>
+                                <div class="analytics-legend">
+                                    <span class="legend-item">
+                                        <span class="legend-color" style="background: #3b82f6;"></span>
+                                        Leads
+                                    </span>
+                                    <span class="legend-item">
+                                        <span class="legend-color" style="background: #10b981;"></span>
+                                        Conversions
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="analytics-content">
+                                <canvas id="trendChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <div class="analytics-header">
+                                <h3>Conversion Funnel</h3>
+                            </div>
+                            <div class="analytics-content">
+                                <canvas id="funnelChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <div class="analytics-header">
+                                <h3>Response Time Distribution</h3>
+                            </div>
+                            <div class="analytics-content">
+                                <canvas id="responseTimeChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="analytics-card">
+                            <div class="analytics-header">
+                                <h3>Top Performing Sources</h3>
+                            </div>
+                            <div class="analytics-content">
+                                <div class="source-ranking">
+                                    <div class="source-item">
+                                        <div class="source-info">
+                                            <span class="source-name">Telegram</span>
+                                            <span class="source-count">342 leads</span>
+                                        </div>
+                                        <div class="source-bar">
+                                            <div class="source-progress" style="width: 85%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="source-item">
+                                        <div class="source-info">
+                                            <span class="source-name">WhatsApp</span>
+                                            <span class="source-count">256 leads</span>
+                                        </div>
+                                        <div class="source-bar">
+                                            <div class="source-progress" style="width: 64%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="source-item">
+                                        <div class="source-info">
+                                            <span class="source-name">Web Form</span>
+                                            <span class="source-count">189 leads</span>
+                                        </div>
+                                        <div class="source-bar">
+                                            <div class="source-progress" style="width: 47%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="source-item">
+                                        <div class="source-info">
+                                            <span class="source-name">Zalo</span>
+                                            <span class="source-count">145 leads</span>
+                                        </div>
+                                        <div class="source-bar">
+                                            <div class="source-progress" style="width: 36%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="analytics-card full-width">
+                            <div class="analytics-header">
+                                <h3>Sales Team Performance</h3>
+                            </div>
+                            <div class="analytics-content">
+                                <div class="performance-table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Sales Rep</th>
+                                                <th>Total Leads</th>
+                                                <th>Conversion Rate</th>
+                                                <th>Avg Response Time</th>
+                                                <th>Performance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="rep-info">
+                                                        <img src="https://picsum.photos/seed/rep1/32/32" alt="Rep">
+                                                        <span>John Sales</span>
+                                                    </div>
+                                                </td>
+                                                <td>142</td>
+                                                <td>24.5%</td>
+                                                <td>3.2 min</td>
+                                                <td>
+                                                    <div class="performance-badge excellent">Excellent</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="rep-info">
+                                                        <img src="https://picsum.photos/seed/rep2/32/32" alt="Rep">
+                                                        <span>Sarah Manager</span>
+                                                    </div>
+                                                </td>
+                                                <td>98</td>
+                                                <td>31.2%</td>
+                                                <td>2.8 min</td>
+                                                <td>
+                                                    <div class="performance-badge excellent">Excellent</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="rep-info">
+                                                        <img src="https://picsum.photos/seed/rep3/32/32" alt="Rep">
+                                                        <span>Mike Agent</span>
+                                                    </div>
+                                                </td>
+                                                <td>76</td>
+                                                <td>18.7%</td>
+                                                <td>5.1 min</td>
+                                                <td>
+                                                    <div class="performance-badge good">Good</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div class="page hidden" id="settings-page">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Settings</h1>
+                            <p>Configure your integrations and preferences</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- Integrations Section -->
+                        <div class="settings-section">
+                            <div class="section-header">
+                                <h3>Integrations</h3>
+                                <p>Connect your messaging platforms</p>
+                            </div>
+
+                            <div class="integration-cards">
+                                <div class="integration-card">
+                                    <div class="integration-header">
+                                        <div class="integration-icon telegram">
+                                            <i class="fab fa-telegram"></i>
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Telegram Bot</h4>
+                                            <p>Receive leads directly from Telegram</p>
+                                        </div>
+                                        <div class="integration-toggle">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="integration-config">
+                                        <div class="form-group">
+                                            <label>Bot Token</label>
+                                            <input type="password" value="123456789:ABCdefGHIjklMNOpqrsTUVwxyz" class="form-input">
+                                        </div>
+                                        <button class="btn btn-sm btn-primary">Test Connection</button>
+                                    </div>
+                                </div>
+
+                                <div class="integration-card">
+                                    <div class="integration-header">
+                                        <div class="integration-icon whatsapp">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>WhatsApp API</h4>
+                                            <p>Connect WhatsApp Business API</p>
+                                        </div>
+                                        <div class="integration-toggle">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="integration-config">
+                                        <div class="form-group">
+                                            <label>API Key</label>
+                                            <input type="password" placeholder="Enter WhatsApp API key" class="form-input">
+                                        </div>
+                                        <button class="btn btn-sm btn-primary">Test Connection</button>
+                                    </div>
+                                </div>
+
+                                <div class="integration-card">
+                                    <div class="integration-header">
+                                        <div class="integration-icon zalo">
+                                            <i class="fas fa-comment"></i>
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Zalo OA</h4>
+                                            <p>Connect Zalo Official Account</p>
+                                        </div>
+                                        <div class="integration-toggle">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="integration-config">
+                                        <div class="form-group">
+                                            <label>OA ID</label>
+                                            <input type="text" placeholder="Enter OA ID" class="form-input">
+                                        </div>
+                                        <button class="btn btn-sm btn-primary">Test Connection</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Configuration -->
+                        <div class="settings-section">
+                            <div class="section-header">
+                                <h3>AI Configuration</h3>
+                                <p>Configure AI processing settings</p>
+                            </div>
+
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label>Ollama Base URL</label>
+                                    <input type="text" value="http://localhost:11434" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>AI Model</label>
+                                    <select class="form-select">
+                                        <option selected>llama3</option>
+                                        <option>llama2</option>
+                                        <option>mistral</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Embedding Model</label>
+                                    <select class="form-select">
+                                        <option selected>nomic-embed-text</option>
+                                        <option>all-minilm</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary">Test AI Connection</button>
+                            </div>
+                        </div>
+
+                        <!-- SLA Settings -->
+                        <div class="settings-section">
+                            <div class="section-header">
+                                <h3>SLA Settings</h3>
+                                <p>Configure response time thresholds</p>
+                            </div>
+
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label>Warning Threshold (minutes)</label>
+                                    <input type="number" value="5" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Critical Threshold (minutes)</label>
+                                    <input type="number" value="10" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Auto-assignment Rules</label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" checked>
+                                        <span>Assign leads round-robin</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" checked>
+                                        <span>Prioritize hot leads</span>
+                                    </label>
+                                </div>
+                                <button class="btn btn-primary">Save SLA Settings</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- Add Lead Modal -->
+    <div class="modal" id="addLeadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Lead</h3>
+                <button class="modal-close" id="closeAddLeadModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addLeadForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name *</label>
+                            <input type="text" name="name" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <select name="country" class="form-select">
+                                <option value="">Select Country</option>
+                                <option value="USA">United States</option>
+                                <option value="Vietnam">Vietnam</option>
+                                <option value="Singapore">Singapore</option>
+                                <option value="Malaysia">Malaysia</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Source</label>
+                            <select name="source" class="form-select">
+                                <option value="MANUAL">Manual</option>
+                                <option value="WEB">Web Form</option>
+                                <option value="TELEGRAM">Telegram</option>
+                                <option value="WHATSAPP">WhatsApp</option>
+                                <option value="ZALO">Zalo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Temperature</label>
+                            <select name="temperature" class="form-select">
+                                <option value="COLD">Cold</option>
+                                <option value="WARM" selected>Warm</option>
+                                <option value="HOT">Hot</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Message/Content *</label>
+                        <textarea name="content" rows="4" required class="form-textarea"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelAddLead">Cancel</button>
+                <button class="btn btn-primary" id="saveAddLead">Add Lead</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lead Detail Modal -->
+    <div class="modal modal-large" id="leadDetailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="lead-detail-header">
+                    <div class="lead-info">
+                        <h3 id="leadDetailName">Lead Name</h3>
+                        <div class="lead-meta">
+                            <span class="lead-status" id="leadDetailStatus">NEW</span>
+                            <span class="lead-temperature" id="leadDetailTemperature">WARM</span>
+                        </div>
+                    </div>
+                    <button class="modal-close" id="closeLeadDetailModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="lead-detail-content">
+                    <div class="lead-detail-sidebar">
+                        <div class="lead-detail-section">
+                            <h4>Contact Information</h4>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span id="leadDetailEmail">email@example.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span id="leadDetailPhone">+1234567890</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-globe"></i>
+                                    <span id="leadDetailCountry">Country</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-tag"></i>
+                                    <span id="leadDetailSource">Source</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lead-detail-section">
+                            <h4>AI Analysis</h4>
+                            <div class="ai-analysis">
+                                <div class="analysis-item">
+                                    <label>Language:</label>
+                                    <span id="leadDetailLanguage">English</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <label>Intent:</label>
+                                    <span id="leadDetailIntent">Inquiry</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <label>Product Interest:</label>
+                                    <span id="leadDetailProduct">Eco-Lite Series</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <label>Budget:</label>
+                                    <span id="leadDetailBudget">$20,000</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <label>Urgency:</label>
+                                    <span id="leadDetailUrgency">Medium</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lead-detail-section">
+                            <h4>AI Suggested Reply</h4>
+                            <div class="ai-suggestion">
+                                <p id="leadDetailSuggestion">Thank you for your interest in our bamboo houses. I'd be happy to provide you with more information...</p>
+                                <button class="btn btn-sm btn-primary">Use This Reply</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lead-detail-main">
+                        <div class="lead-detail-section">
+                            <h4>Original Message</h4>
+                            <div class="original-message">
+                                <p id="leadDetailContent">Original message content here...</p>
+                            </div>
+                        </div>
+
+                        <div class="lead-detail-section">
+                            <h4>Conversation</h4>
+                            <div class="conversation-thread" id="conversationThread">
+                                <!-- Messages will be populated here -->
+                            </div>
+                            <div class="message-input">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Type your message..." id="messageInput">
+                                    <button class="btn btn-primary" id="sendMessageBtn">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

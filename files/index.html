@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LeadFlow AI — Intelligent Multi-Channel Sales CRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="styles.css" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          sans: ['Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+        colors: {
+          ink: { 950: '#070912', 900: '#0b0f1d', 800: '#111729', 700: '#1a2238', 600: '#26304b' },
+          neon: { cyan: '#22d3ee', blue: '#60a5fa', purple: '#a855f7', pink: '#ec4899' },
+        },
+      },
+    },
+  };
+</script>
+</head>
+<body class="font-sans bg-ink-950 text-slate-200 antialiased">
+
+<!-- ============ AMBIENT BACKGROUND ============ -->
+<div class="ambient" aria-hidden="true">
+  <div class="ambient__grid"></div>
+  <div class="ambient__glow ambient__glow--cyan"></div>
+  <div class="ambient__glow ambient__glow--purple"></div>
+  <div class="ambient__noise"></div>
+</div>
+
+<!-- ============ APP SHELL ============ -->
+<div id="app" class="relative min-h-screen flex">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar__brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5"><path d="M3 12L9 6L15 12L21 6V18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="brand-text">
+        <div class="font-display font-bold text-white tracking-tight">LeadFlow</div>
+        <div class="text-[10px] uppercase tracking-[0.18em] text-neon-cyan font-mono">AI · v2.4</div>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav" id="sidebar-nav">
+      <div class="nav-group-label">Workspace</div>
+      <a class="nav-item is-active" data-route="dashboard"><i data-icon="grid"></i><span>Dashboard</span><span class="nav-indicator"></span></a>
+      <a class="nav-item" data-route="leads"><i data-icon="users"></i><span>Lead Management</span><span class="nav-badge">142</span></a>
+      <a class="nav-item" data-route="pipeline"><i data-icon="kanban"></i><span>Pipeline</span></a>
+      <a class="nav-item" data-route="lead-detail"><i data-icon="target"></i><span>Lead Detail</span></a>
+
+      <div class="nav-group-label mt-6">Tools</div>
+      <a class="nav-item" data-route="kb"><i data-icon="book"></i><span>Knowledge Base</span></a>
+      <a class="nav-item" data-route="scripts"><i data-icon="script"></i><span>Sales Scripts</span></a>
+      <a class="nav-item" data-route="config"><i data-icon="bolt"></i><span>Integrations</span></a>
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="upgrade-card">
+        <div class="upgrade-card__halo"></div>
+        <div class="text-xs uppercase tracking-widest text-neon-cyan font-mono mb-1">PRO</div>
+        <div class="font-display font-semibold text-white text-sm leading-tight">Unlock AI Lead Scoring</div>
+        <div class="text-xs text-slate-400 mt-1.5">Auto-score leads with GPT-4 reasoning.</div>
+        <button class="btn-primary w-full mt-3 text-xs h-8">Upgrade →</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main flex-1 min-w-0">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <button id="sidebar-toggle" class="icon-btn lg:hidden" aria-label="Menu"><i data-icon="menu"></i></button>
+
+      <div class="topbar__search">
+        <i data-icon="search" class="text-slate-500"></i>
+        <input id="global-search" type="text" placeholder="Search leads, companies, scripts… (⌘K)" />
+        <kbd class="kbd">⌘K</kbd>
+      </div>
+
+      <div class="topbar__actions">
+        <button class="icon-btn" id="theme-pulse" title="Live"><span class="pulse-dot"></span></button>
+        <button class="icon-btn relative" id="notif-trigger" aria-label="Notifications">
+          <i data-icon="bell"></i>
+          <span class="notif-count">3</span>
+        </button>
+        <div class="user-chip">
+          <div class="user-chip__avatar">AN</div>
+          <div class="hidden md:block">
+            <div class="text-sm font-semibold text-white leading-tight">An Nguyen</div>
+            <div class="text-[11px] text-slate-400 leading-tight">Sales Lead · HCMC</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== ROUTE OUTLET ===== -->
+    <section id="view-outlet" class="view-outlet"></section>
+  </main>
+</div>
+
+<!-- ===== NOTIFICATION PANEL ===== -->
+<div id="notif-panel" class="notif-panel">
+  <div class="notif-panel__head">
+    <div>
+      <div class="font-display font-semibold text-white">Notifications</div>
+      <div class="text-xs text-slate-400">3 unread · Updated just now</div>
+    </div>
+    <button class="text-xs text-neon-cyan hover:text-white transition" data-action="mark-all">Mark all read</button>
+  </div>
+  <div class="notif-panel__list" id="notif-list"></div>
+</div>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div id="toast-stack" class="toast-stack"></div>
+
+<!-- ===== MODAL ROOT ===== -->
+<div id="modal-root"></div>
+
+<script src="data.js"></script>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

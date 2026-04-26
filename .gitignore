@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.env
+*.pyc
+instance/
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ngrok
+ngrok.yml
+
+# Docker volumes
+postgres_data/
+
+# Test files
+backend/test_*.py
+
+# Logs
+*.log
+celerybeat-schedule
